@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css')}}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Weather App</h1>
+            <div>
+                <button class="btn btn-register">Register</button>
+                <button class="btn">Login</button>
+            </div>
+        </header>
+        <div class="weather-widget">
+            <h2 class="city">{{ city }}</h2>
+            <img src="{{ icon }}" alt="weather-icon" class="weather-icon">
+            <p class="temperature">{{ temperature }} °C</p>
+            <form action="">
+                <input type="text" name="city" placeholder="Enter city name">
+                <button class="btn" type="submit">Get Weather</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
