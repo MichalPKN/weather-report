@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import sys
 
 class WeatherService:
     def __init__(self):
@@ -11,6 +12,9 @@ class WeatherService:
         url = f'{self.base_url}current.json?q={city}&key={self.api_key}'
         try:
             response = requests.get(url, timeout=10)
-            return response.json()
+            print(response.status_code, file=sys.stderr)
+            weather = response.json()
+            weather['status_code'] = response.status_code
+            return weather
         except requests.exceptions.RequestException as e:
             return {'error': str(e)}

@@ -5,7 +5,7 @@ class WeatherTemplateRenderer:
         pass
 
     def render_weather(self, weather_data):
-        if 'error' in weather_data:
+        if weather_data['status_code'] != 200:
             return render_template(
                 'current_weather_error.html',
                 error_message=weather_data['error']['message'],
