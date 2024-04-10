@@ -5,6 +5,11 @@ class WeatherTemplateRenderer:
         pass
 
     def render_weather(self, weather_data):
+        if 'error' in weather_data:
+            return render_template(
+                'current_weather_error.html',
+                error_message=weather_data['error']['message'],
+            )
         return render_template(
             'current_weather.html',
             city=weather_data['location']['name'],

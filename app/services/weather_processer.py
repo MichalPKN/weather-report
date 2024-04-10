@@ -9,7 +9,7 @@ class WeatherProcesser:
 
     def process_weather(self):
         city = request.args.get('city')
-        if not city:
+        if not city.strip():
             city = 'Prague'
         weather_data = self.weather_service.get_weather(city)
         rendered_page = self.weather_template_renderer.render_weather(weather_data)
