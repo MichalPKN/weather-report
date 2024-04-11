@@ -16,4 +16,4 @@ class WeatherService:
             weather['status_code'] = response.status_code
             return weather
         except requests.exceptions.RequestException as e:
-            return {'error': str(e)}
+            return {'error': {'message' : str(e)}, 'status_code': 500}
