@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -22,5 +25,5 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        coverage run -m pytest --source=.
+        coverage run -m pytest
         coverage report
