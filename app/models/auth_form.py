@@ -20,10 +20,13 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Submit')
     def validate_name(form, field):
         with open('app/data/users.json', 'r') as f:
-            users = json.load(f)
-            #print to console
-            print(users, file=sys.stderr)
-            if users and field.data in [user['name'] for user in users]:
+            users = f.read()
+            if not users:
+                return
+            print("\n\n brooo \n\n", users, file=sys.stderr)
+            users = json.loads(users)
+            #print(users, file=sys.stderr)
+            if field.data in [user['name'] for user in users]:
                 raise ValidationError('Username already exists')
 
 class LoginForm(FlaskForm): 
