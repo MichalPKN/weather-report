@@ -14,12 +14,34 @@
                 <a href="{{url_for('auth_controller.login')}}" class="link">Login</a>
             </div>
         </header>
-        <div class="form-container">
+        <form class="form-container" method="post">
             <div class="form-title">Register</div>
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <button class="btn">Register</button>
-        </div>
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.name.label }}
+                {{ form.name(size=32) }}
+                {% for error in form.name.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.password.label }}
+                {{ form.password(size=32) }}
+                {% for error in form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.confirm_password.label }}
+                {{ form.confirm_password(size=32) }}
+                {% for error in form.confirm_password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.submit(class='btn') }}
+            </div>
+        </form>
     </div>
 </body>
 </html>
