@@ -1,11 +1,22 @@
 import json
+from flask_login import UserMixin
 
 class AuthProcessor:
-    #def __init__(self, user_repository):
-    #    self.user_repository = user_repository
-
-    def login(self):
-        pass
+    def login_user(self, form):
+        with open('app/data/users.json', 'r') as f:
+            users = f.read()
+            if not users:
+                return None
+            users = json.loads(users)
+            for user in users:
+                if form.name.data == user['name']:
+                    if form.password.data == user['password']:
+                        user = UserMixin()
+                        user.id = form.name.data
+                        return user
+                    else:
+                        return None
+            return None
     
     def register_user(self, form):
         user = {
