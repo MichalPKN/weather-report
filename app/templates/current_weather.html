@@ -10,8 +10,12 @@
         <header>
             <h1>Weather App</h1>
             <div>
-                <a href="{{url_for('auth_controller.register')}}" class="link btn-register">Register</a>
-                <a href="{{url_for('auth_controller.login')}}" class="link">Login</a>
+                {% if not current_user.is_authenticated %}
+                    <a href="{{url_for('auth_controller.register')}}" class="link btn-register">Register</a>
+                    <a href="{{url_for('auth_controller.login')}}" class="link">Login</a>
+                {% else %}
+                    <a href="{{url_for('auth_controller.logout')}}" class="link">Logout</a>
+                {% endif %}
             </div>
         </header>
         <div class="weather-widget">
