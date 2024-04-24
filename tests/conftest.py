@@ -6,6 +6,7 @@ def client():
     app.config.update({
         "TESTING": True,
     })
+    app.config['WTF_CSRF_ENABLED'] = False
 
     # other setup can go here
 
