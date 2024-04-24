@@ -18,15 +18,26 @@
                 {% endif %}
             </div>
         </header>
-        <div class="weather-widget">
-            <h2 class="city">{{ city }}</h2>
-            <img src="{{ icon }}" alt="weather-icon" class="weather-icon">
-            <p class="temperature">{{ temperature }} °C</p>
-            <form action="">
-                <input type="text" name="city" placeholder="Enter city name">
-                <button class="btn" type="submit">Get Weather</button>
-            </form>
-        </div>
+        <form class="form-container" method="post">
+            <div class="form-title">Login</div>
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.name.label }}
+                {{ form.name(size=32) }}
+                {% for error in form.name.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.password.label }}
+                {{ form.password(size=32) }}
+                {% for error in form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.submit(class='btn') }}
+            </div>
     </div>
 </body>
 </html>
