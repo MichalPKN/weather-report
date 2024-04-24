@@ -23,7 +23,6 @@ def login():
         user = AuthProcessor.AuthProcessor().login_user(form)
         if user:
             login_user(user)
-            print("User logged in", user, file=sys.stderr)
         else:
             form.password.errors.append('Incorrect credentials')
     return AuthTemplateRenderer.AuthTemplateRenderer().render_login(form)
