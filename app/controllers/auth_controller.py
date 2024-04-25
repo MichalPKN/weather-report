@@ -4,8 +4,6 @@ import app.services.auth_template_renderer as AuthTemplateRenderer
 import app.services.auth_processor as AuthProcessor
 from app.models.auth_form import RegisterForm, LoginForm
 
-import sys
-
 auth_controller = Blueprint('auth_controller', __name__)
 
 @auth_controller.route('/register', methods=['GET', 'POST'])
@@ -23,6 +21,7 @@ def login():
         user = AuthProcessor.AuthProcessor().login_user(form)
         if user:
             login_user(user)
+            return redirect('/')
         else:
             form.password.errors.append('Incorrect credentials')
     return AuthTemplateRenderer.AuthTemplateRenderer().render_login(form)
