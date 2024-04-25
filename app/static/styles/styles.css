@@ -37,6 +37,13 @@ header div {
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.weather-info {
+    display: flex;
+    justify-content: space-between;
+}
+.weather-day {
+    text-align: center;
+}
 .weather-icon {
     font-size: 48px;
     color: #f39c12;
@@ -45,6 +52,7 @@ header div {
     font-size: 24px;
     font-weight: bold;
 }
+
 /* Input field styles */
 input[type="text"] {
     width: 100%;
@@ -53,6 +61,7 @@ input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 /* Buttons styles */
 .btn {
     background-color: #3498db;

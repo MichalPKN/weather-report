@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css')}}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Weather App</h1>
+            <div>
+                {% if not current_user.is_authenticated %}
+                    <a href="{{url_for('auth_controller.register')}}" class="link btn-register">Register</a>
+                    <a href="{{url_for('auth_controller.login')}}" class="link">Login</a>
+                {% else %}
+                    <a href="{{url_for('auth_controller.logout')}}" class="link">Logout</a>
+                {% endif %}
+            </div>
+        </header>
+        <div class="weather-widget">
+            <h2 class="city">{{ city }}</h2>
+            <div class="weather-info">
+                {% for day in weather %}
+                    <div class="weather-day">
+                        <h3>{{ day.date }}</h3>
+                        <img src="{{ day.icon }}" alt="weather-icon" class="weather-icon">
+                        <p class="temperature">{{ day.temperature }} °C</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <form action="">
+                <input type="text" name="city" placeholder="Enter city name">
+                <button class="btn" type="submit">Get Weather</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
