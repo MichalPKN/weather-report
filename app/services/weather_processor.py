@@ -2,6 +2,7 @@ import app.services.weather_service as WeatherService
 import app.services.weather_template_renderer as WeatherTemplateRenderer
 import app.services.fav_cities_service as FavCitiesService
 from flask import request
+import sys
 
 class WeatherProcessor:
     def __init__(self):
@@ -29,4 +30,13 @@ class WeatherProcessor:
     def add_city_to_fav(self, name):
         city = request.args.get('city')
         self.fav_cities_service.add_fav_city(name, city)
+        return city
+    
+    def remove_city_from_fav(self, name):
+        cities = request.args.get('city')
+        city, remove_city = cities.split(',')
+        print(remove_city, city, file=sys.stderr)
+        self.fav_cities_service.remove_fav_city(name, remove_city)
+        if city == remove_city:
+            city = 'Prague'
         return city
