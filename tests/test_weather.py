@@ -34,6 +34,15 @@ def test_premium_weather_wrong_city(client):
 
 def test_fav_city(client):
     login_user(client)
+    #adding city to fav
     response = client.get("/add_to_fav?city=Liberec", follow_redirects=True)
-    assert b'<li>Liberec</li>' in response.data
+    assert b'<a class="city-link" href="/?city=Liberec">Liberec</a>' in response.data
     assert b'<h2 class="city">Liberec</h2>' in response.data
+    #trying to add the same city again
+    response = client.get("/add_to_fav?city=Liberec", follow_redirects=True)
+    assert b'<a class="city-link" href="/?city=Liberec">Liberec</a>' in response.data
+    assert b'<h2 class="city">Liberec</h2>' in response.data
+    #removing city from fav
+    response = client.get("/remove_from_fav?city=Praha,Liberec", follow_redirects=True)
+    assert b'<a class="city-link" href="/?city=Liberec">Liberec</a>' not in response.data
+    assert b'<h2 class="city">Praha</h2>' in response.data
