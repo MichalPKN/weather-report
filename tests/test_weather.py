@@ -31,3 +31,9 @@ def test_premium_weather_wrong_city(client):
     response = client.get("/?city=NonExistingCity")
     assert b'<h2 class="city">Something went wrong</h2>' in response.data
     assert b'<p>No matching location found.</p>' in response.data
+
+def test_fav_city(client):
+    login_user(client)
+    response = client.get("/add_to_fav?city=Liberec", follow_redirects=True)
+    assert b'<li>Liberec</li>' in response.data
+    assert b'<h2 class="city">Liberec</h2>' in response.data
