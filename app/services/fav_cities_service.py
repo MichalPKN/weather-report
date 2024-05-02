@@ -15,16 +15,14 @@ class FavCitiesService:
     def add_fav_city(self, user_id, city):
         print('adding city', file=sys.stderr)
         with open('app/data/users.json', 'r+') as f:
-            print('file opened', file=sys.stderr)
             users = f.read()
             users = json.loads(users)
             for user in users:
-                print(user_id, user['name'], file=sys.stderr)
                 if user_id == user['name']:
-                    user['fav_cities'].append(city)
-                    f.seek(0)
-                    f.write(json.dumps(users))
-                    print('city added', file=sys.stderr)
+                    if city not in user['fav_cities']:
+                        user['fav_cities'].append(city)
+                        f.seek(0)
+                        f.write(json.dumps(users))
                     return
 
     def remove_fav_city(self, user_id, city_name):
