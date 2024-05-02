@@ -119,16 +119,28 @@ input[type="password"] {
     cursor: pointer;
 }
 
-.city-div {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
 .fav {
     font-size: 12px;
     padding: 6px 8px;
     height: fit-content;
+}
+
+.remove_form,
+.city-link {
+  display: inline-block;
+}
+
+.remove {
+    font-size: 12px;
+    padding: 3px 5px;
+    background-color: red;
+    height: fit-content;
+}
+
+.city-div {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }
 
 /* Favorite cities styles */

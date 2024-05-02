@@ -42,7 +42,12 @@
                 <h3>Favourite Cities</h3>
                 <ul>
                     {% for fav_city in favorite_cities %}
-                        <li>{{ fav_city }}</li>
+                        <li>
+                            <form action="\remove_from_fav" class="remove_form">
+                                <button type="submit" name="city" value="{{ city }},{{ fav_city }}" class="btn remove">X</button>
+                            </form>
+                            <a class="city-link" href="{{ url_for('weather_controller.show_weather') }}?city={{ fav_city }}">{{ fav_city }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
