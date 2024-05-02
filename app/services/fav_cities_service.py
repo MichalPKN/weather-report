@@ -22,6 +22,7 @@ class FavCitiesService:
                     if city not in user['fav_cities']:
                         user['fav_cities'].append(city)
                         f.seek(0)
+                        f.truncate()
                         f.write(json.dumps(users))
                     return
 
@@ -33,5 +34,6 @@ class FavCitiesService:
                 if user_id == user['name']:
                     user['fav_cities'].remove(city_name)
                     f.seek(0)
+                    f.truncate()
                     f.write(json.dumps(users))
                     return
