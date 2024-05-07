@@ -1,20 +1,42 @@
 import app.services.weather_service as WeatherService
 import app.services.weather_template_renderer as WeatherTemplateRenderer
+import app.services.fav_cities_service as FavCitiesService
 from flask import request
+import sys
 
 class WeatherProcessor:
     def __init__(self):
         self.weather_service = WeatherService.WeatherService()
         self.weather_template_renderer = WeatherTemplateRenderer.WeatherTemplateRenderer()
+        self.fav_cities_service = FavCitiesService.FavCitiesService()
 
-    def process_weather(self, logged_in=False):
+    def process_weather(self):
         city = request.args.get('city')
         if not city:
             city = 'Prague'
-        if logged_in:
-            weather_data = self.weather_service.get_premium_weather(city)
-            rendered_page = self.weather_template_renderer.render_premium_weather(weather_data)
-        else:
-            weather_data = self.weather_service.get_weather(city)
-            rendered_page = self.weather_template_renderer.render_weather(weather_data)
+        weather_data = self.weather_service.get_weather(city)
+        rendered_page = self.weather_template_renderer.render_weather(weather_data)
         return rendered_page
+    
+    def process_premium_weather(self, name):
+        city = request.args.get('city')
+        if not city:
+            city = 'Prague'
+        weather_data = self.weather_service.get_premium_weather(city)
+        cities = self.fav_cities_service.get_fav_cities(name)
+        rendered_page = self.weather_template_renderer.render_premium_weather(weather_data, cities)
+        return rendered_page
+    
+    def add_city_to_fav(self, name):
+        city = request.args.get('city')
+        self.fav_cities_service.add_fav_city(name, city)
+        return city
+    
+    def remove_city_from_fav(self, name):
+        cities = request.args.get('city')
+        city, remove_city = cities.split(',')
+        print(remove_city, city, file=sys.stderr)
+        self.fav_cities_service.remove_fav_city(name, remove_city)
+        if city == remove_city:
+            city = 'Prague'
+        return city

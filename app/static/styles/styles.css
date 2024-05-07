@@ -39,27 +39,27 @@ header div {
 }
 .weather-info {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 9px;
 }
 .weather-day {
     text-align: center;
+    margin-bottom: 13px;
 }
 .weather-icon {
     font-size: 48px;
     color: #f39c12;
+    width: 74px;
 }
 .temperature {
     font-size: 24px;
     font-weight: bold;
+    margin-top: 9px;
 }
 
-/* Input field styles */
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.weather-day h3 {
+    margin: 9px 0;
 }
 
 /* Buttons styles */
@@ -102,8 +102,9 @@ input[type="text"] {
 }
 input[type="text"],
 input[type="password"] {
+    width: 100%;
     box-sizing: border-box;
-    width: 55%;
+    max-width: 310px;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -118,3 +119,52 @@ input[type="password"] {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.fav {
+    font-size: 12px;
+    padding: 6px 8px;
+    height: fit-content;
+}
+
+.remove_form {
+    display: inline-block;
+}
+
+.city-link {
+    display: inline-block;
+    color: blue;
+}
+
+.remove {
+    font-size: 12px;
+    padding: 3px 5px;
+    background-color: red;
+    height: fit-content;
+}
+
+.city-div {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Favorite cities styles */
+.fav-cities {
+    margin-top: 20px;
+}
+
+.fav-cities h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.fav-cities ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px 0;
+}
+
+.fav-cities li {
+    margin-bottom: 5px;
+}
+
