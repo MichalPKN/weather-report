@@ -19,8 +19,10 @@ class WeatherTemplateRenderer:
         for day in weather_data:
             if self.check_error(day):
                 return self.check_error(day)
+            date = day['forecast']['forecastday'][0]['date'].split('-')
+            date = str(int(date[2])) + '. ' + str(int(date[1])) + '. ' + str(int(date[0]))
             weather.append({
-                'date': day['forecast']['forecastday'][0]['date'],
+                'date': date,
                 'icon': day['forecast']['forecastday'][0]['day']['condition']['icon'],
                 'temperature': day['forecast']['forecastday'][0]['day']['avgtemp_c'],
             })
