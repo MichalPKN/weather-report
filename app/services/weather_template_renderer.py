@@ -19,16 +19,16 @@ class WeatherTemplateRenderer:
         for day in weather_data:
             if self.check_error(day):
                 return self.check_error(day)
-            date = day['forecast']['forecastday'][0]['date'].split('-')
+            date = day['date'].split('-')
             date = str(int(date[2])) + '. ' + str(int(date[1])) + '. ' + str(int(date[0]))
             weather.append({
                 'date': date,
-                'icon': day['forecast']['forecastday'][0]['day']['condition']['icon'],
-                'temperature': day['forecast']['forecastday'][0]['day']['avgtemp_c'],
+                'icon': day['day']['condition']['icon'],
+                'temperature': day['day']['avgtemp_c'],
             })
         return render_template(
             'premium_weather.html',
-            city=weather_data[0]['location']['name'],
+            city=weather_data[0]['location'],
             weather=weather,
             favorite_cities=cities
         )

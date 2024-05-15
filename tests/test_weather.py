@@ -68,8 +68,8 @@ def test_api_premium(client):
     response = client.get("/api")
     assert response.status_code == 200
     assert response.headers['Content-Type'] == 'application/json'
-    assert response.json[0]['location']['name'] == 'Prague'
+    assert response.json[0]['location']== 'Prague'
     assert len(response.json) == 5
-    assert 'avgtemp_c' in response.json[0]['forecast']['forecastday'][0]['day']
-    assert 'icon' in response.json[0]['forecast']['forecastday'][0]['day']['condition']
-    assert 'date' in response.json[0]['forecast']['forecastday'][0]
+    assert 'avgtemp_c' in response.json[0]['day']
+    assert 'icon' in response.json[0]['day']['condition']
+    assert 'date' in response.json[0]
