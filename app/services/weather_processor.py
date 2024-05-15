@@ -35,7 +35,6 @@ class WeatherProcessor:
     def remove_city_from_fav(self, name):
         cities = request.args.get('city')
         city, remove_city = cities.split(',')
-        print(remove_city, city, file=sys.stderr)
         self.fav_cities_service.remove_fav_city(name, remove_city)
         if city == remove_city:
             city = 'Prague'

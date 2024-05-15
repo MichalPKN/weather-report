@@ -31,7 +31,6 @@ class WeatherService:
         url = f'{self.base_url}history.json?q={city}&dt={date}&key={self.api_key}'
         try:
             response = requests.get(url, timeout=10)
-            print(response.status_code, file=sys.stderr)
             weather = response.json()
             weather['status_code'] = response.status_code
             return weather
