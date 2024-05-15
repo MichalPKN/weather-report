@@ -29,10 +29,12 @@ class WeatherService:
         try:
             response = requests.get(forecast_url, timeout=10)
             forecast = response.json()
+            if 'error' in forecast:
+                forecast['status_code'] = response.status_code
+                return [forecast]
             status_code = response.status_code
         except requests.exceptions.RequestException as e:
             return [{'error': {'message' : str(e)}, 'status_code': 500}]
-        print("aaaaaaaaaaaaaa", len(forecast['forecast']['forecastday']), file=sys.stderr)
         for day in forecast['forecast']['forecastday']:
             day['status_code'] = status_code
             day['location'] = days_weather[0]['location']
@@ -46,6 +48,9 @@ class WeatherService:
         try:
             response = requests.get(url, timeout=10)
             weather = response.json()
+            if 'error' in weather:
+                weather['status_code'] = response.status_code
+                return weather
             weather['forecast']['forecastday'][0]['status_code'] = response.status_code
             weather['forecast']['forecastday'][0]['location'] = weather['location']['name']
             return weather['forecast']['forecastday'][0]
